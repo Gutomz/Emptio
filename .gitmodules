@@ -1,0 +1,9 @@
+[submodule "Emptio_APP"]
+	path = Emptio_APP
+	url = https://github.com/Gutomz/Emptio_APP.git
+[submodule "Emptio_API-Rest"]
+	path = Emptio_API-Rest
+	url = https://github.com/Gutomz/Emptio_API-Rest.git
+[submodule "Emptio_API-Product-Recognition"]
+	path = Emptio_API-Product-Recognition
+	url = https://github.com/Gutomz/Emptio_API-Product-Recognition.git

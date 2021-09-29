@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  db:
+    image: mongo:4.2
+    container_name: db
+    restart: always
+    ports:
+      - ${DB_PORT}:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+  
+  api:
+    build: ./Emptio_API-Rest
+    container_name: api
+    restart: always
+    depends_on:
+      - db
+    expose:
+      - ${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    env_file: .env
+    command: node dist/index.js
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  product_recognizer:
+    build: ./Emptio_API-Product-Recognition
+    container_name: product_recognition
+    expose:
+      - ${PR_PORT}
+    ports:
+      - ${PR_PORT}:${PR_PORT}
+    env_file: .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
